@@ -1,23 +1,24 @@
-import React from 'react';
-import { Checkbox } from '../components/CheckBox'
-import { useTasks } from '../hooks';
+import React from "react";
+import { Checkbox } from "../components/CheckBox";
+import { useTasks } from "../hooks";
 
 export const Tasks = () => {
-  const {tasks } = useTasks(1);
+  const { tasks } = useTasks("1");
 
+  console.log(tasks);
   let projectName = "";
 
-  return(
-    <div className='tasks' data-testId="task">
-  <h2 data-testId="project-name">{projectName}</h2>
-  <ul className="task__list">
-    {tasks.map(task => (
-      <li key={`${task.id}`}>
-        <Checkbox id={task.id} />
-        <span>{task.task}</span>
-      </li>
-    ))}
-  </ul>
+  return (
+    <div className="tasks" data-testid="task">
+      <h2 data-testid="project-name">{projectName}</h2>
+      <ul className="task__list">
+        {tasks.map(task => (
+          <li key={`${task.id}`}>
+            <Checkbox id={task.id} />
+            <span>{task.task}</span>
+          </li>
+        ))}
+      </ul>
     </div>
-  )
-}
+  );
+};
