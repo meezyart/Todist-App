@@ -3,7 +3,7 @@ import moment from "moment";
 import { firebase } from "../firebase";
 import { collatedTasksExist } from "../helpers";
 
-export const useTasks = (selectedProject = () => {
+export const useTasks = selectedProject  => {
   const [tasks, setTasks] = useState([]);
   const [archivedTasks, setArchivedTasks] = useState([]);
 
@@ -50,13 +50,13 @@ export const useTasks = (selectedProject = () => {
   }, [selectedProject]);
 
   return { tasks, archivedTasks };
-});
+};
 
 export const useProjects = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    firebase
+   firebase
       .firestore()
       .collection("projects")
       .where("userId", "==", "meez")
@@ -67,10 +67,11 @@ export const useProjects = () => {
           ...project.data(),
           docId: project.id
         }));
+        if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
+          setProjects(allProjects);
+        }
       });
-    if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
-      setProjects(allProjects);
-    }
+
   }, [projects]);
 
 
